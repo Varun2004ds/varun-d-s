@@ -1,0 +1,47 @@
+quiz = [
+    {
+        "question": "What is the capital of France?",
+        "options": ["Paris", "London", "Berlin", "Rome"],
+        "answer": 0
+    },
+    {
+        "question": "What is 2+2?",
+        "options": ["3", "4", "5", "6"],
+        "answer": 1
+    },
+    {
+        "question": "Which planet is known as the Red Planet?",
+        "options": ["Earth", "Mars", "Jupiter", "Venus"],
+        "answer": 1
+    }
+]
+
+def ask_question(question, options, answer):
+    print(question)
+    for i, option in enumerate(options):
+        print(f"{i}: {option}")
+    while True:
+        try:
+            user_answer = int(input("Enter the number corresponding to your answer: "))
+            if user_answer < 0 or user_answer >= len(options):
+                print("Invalid input. Please enter a valid number.")
+                continue
+            break
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+    
+    if user_answer == answer:
+        print("Correct!")
+        return True
+    else:
+        print(f"Incorrect. The correct answer is {options[answer]}.")
+        return False
+
+def play_quiz():
+    score = 0
+    for question in quiz:
+        if ask_question(question["question"], question["options"], question["answer"]):
+            score += 1
+    print(f"Your final score is {score} out of {len(quiz)}.")
+
+play_quiz()
